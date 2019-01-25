@@ -22,17 +22,6 @@ public class PhsViewController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, Principal principal) {
-        try {
-            Connection con = sbt.utils.DBConnection.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from sysdiagrams");
-            while (rs.next()) {
-                int count = rs.getInt(1);
-                System.out.println("Total number of books in the table : " + count);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return "index";
     }
 
