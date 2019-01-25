@@ -12,14 +12,17 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 public class DBConnection {
 
     private static Connection connection = null;
-    private static String URL = "jdbc:sqlserver://chenko-server.database.windows.net:1433;DatabaseName=MyDataBase";
     private static final String DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String USER = "chenko";
-    private static final String PASSWORD = "8x725#32250";
+
 
     public static Connection getInstance() throws SQLException {
         if (connection == null) {
             try {
+                String host = PropertyProvider.getProperty("db.host");
+                String dataBase = PropertyProvider.getProperty("db.baseName");
+                String URL = "jdbc:sqlserver://" + host + ":1433;DatabaseName=" + dataBase;
+                String USER =PropertyProvider.getProperty("db.user");
+                String PASSWORD = PropertyProvider.getProperty("db.password");
                 Class.forName(DRIVER_CLASS);
                 DriverManager.registerDriver(new SQLServerDriver());
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
