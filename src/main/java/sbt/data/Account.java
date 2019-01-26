@@ -43,4 +43,12 @@ public class Account {
     public int getBalance() {
         return balance;
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
