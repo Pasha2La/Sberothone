@@ -15,6 +15,5 @@ public class AccountMapper implements RowMapper<Account> {
                 rs.getString(3),
                 rs.getBoolean(4),
                 rs.getTimestamp(5));
-
     }
 }
