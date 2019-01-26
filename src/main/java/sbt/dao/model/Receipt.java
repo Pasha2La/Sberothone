@@ -7,33 +7,35 @@ import javax.persistence.*;
 public class Receipt {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="n_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "n_id")
     private Long id;
-    @Column(name="c_name")
+    @Column(name = "c_name")
     private String name;
-    @Column(name="c_description")
+    @Column(name = "c_description")
     private String description;
-    @Column(name="c_coocking_time")
+    @Column(name = "c_coocking_time")
     private String coockingTime;
-    @Column(name="n_calories")
+    @Column(name = "n_calories")
     private Long calories;
-    @Column(name="n_category")
+    @Column(name = "n_category")
     private Long category;
-    @Column(name="c_healthy")
+    @Column(name = "c_healthy")
     private String healthy;
+    @Column(name = "n_view_count")
+    private Long viewCount;
 
     public Receipt() {
     }
 
-    public Receipt(Long id, String name, String description, String coockingTime, Long calories, Long category, String healthy) {
-        this.id = id;
+    public Receipt(String name, String description, String coockingTime, Long calories, Long category, String healthy, Long viewCount) {
         this.name = name;
         this.description = description;
         this.coockingTime = coockingTime;
         this.calories = calories;
         this.category = category;
         this.healthy = healthy;
+        this.viewCount = viewCount;
     }
 
     @Override
@@ -45,7 +47,8 @@ public class Receipt {
                 ", coockingTime='" + coockingTime + '\'' +
                 ", calories=" + calories +
                 ", category=" + category +
-                ", healthy=" + healthy +
+                ", healthy='" + healthy + '\'' +
+                ", viewCount=" + viewCount +
                 '}';
     }
 
@@ -103,5 +106,13 @@ public class Receipt {
 
     public void setHealthy(String healthy) {
         this.healthy = healthy;
+    }
+
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
     }
 }

@@ -9,6 +9,9 @@ import sbt.dao.repository.*;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 @Repository
 public class DaoImpl extends JdbcDaoSupport implements Dao {
@@ -42,6 +45,31 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     @PostConstruct
     public void postConstruct() {
         setDataSource(hikariDataSource);
+
+
+        //можно по id
+        //accountRepository.deleteById(345L);
+
+        //insert or update
+        Account testAccount = new Account(
+                "test",
+                "pass",
+                false,
+                new Timestamp(Calendar.getInstance().getTimeInMillis())
+        );
+        accountRepository.save(testAccount);
+
+        testAccount.setPassword("newPassword");
+        accountRepository.save(testAccount);
+
+
+
+        //delete
+        accountRepository.delete(testAccount);
+
+
+
+
         Iterable<Account> accounts = accountRepository.findAll();
 
         for (Account account : accounts) {
