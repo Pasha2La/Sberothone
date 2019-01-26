@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sbt.auth.AuthService;
 import sbt.dao.DaoImpl;
+import sbt.data.BaseInfo;
 import sbt.data.LoginInfo;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public class PhsRestController {
     private static final Logger logger = Logger.getLogger(PhsRestController.class);
 
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
     @Autowired
     DaoImpl dao;
@@ -48,6 +50,24 @@ public class PhsRestController {
         }
     }
 
+    @RequestMapping("/logout")
+    public String logout(@RequestBody LoginInfo info, HttpServletResponse response) {
+        try {
+            String token = authService.authenticate(info);
+
+            Cookie jwtRemove = new Cookie("jwt", token);
+            jwtRemove.setMaxAge(0);
+            response.addCookie(jwtRemove);
+        } catch (Exception e) {
+            logger.error("Can't logout user" + e.getMessage());
+            return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
+        }
+
+        JSONObject resp = new JSONObject();
+        resp.append("code", 200);
+        return resp.toString();
+    }
+
     @RequestMapping("/verifyToken")
     public String verifyToken(@CookieValue String jwt) {
         try {
@@ -66,11 +86,17 @@ public class PhsRestController {
 
     }
 
-    @RequestMapping("/search")
-    public String verifyToken(@RequestParam(value = "products") List<String> products,
+/*
+    @RequestMapping("/")
+    public String search(@RequestParam(value = "products") List<String> products,
                               @RequestParam(value = "categories") List<String> categories,
                               @RequestParam(value = "healthy") String healthy) {
+        dao.getRec
+    }
+*/
 
-        return "";
+    @RequestMapping("/")
+    public BaseInfo getCategories() {
+        return new BaseInfo(dao.getCategoryRepository().findAll(), dao.getProductRepository().findAll());
     }
 }
