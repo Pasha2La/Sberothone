@@ -8,8 +8,11 @@ public class Account {
 
     private static final Logger logger = Logger.getLogger(Account.class);
 
-    private final String login;
-    private final String password;
+    private String login;
+    private String password;
+
+    public Account() {
+    }
 
     private Timestamp expireDate;
 
@@ -23,9 +26,13 @@ public class Account {
         return login;
     }
 
+    public void setLogin(String login) { this.login = login; }
+
     public String getPassword() {
         return password;
     }
+
+    public void setPassword(String password) { this.password = password; }
 
     public Timestamp getExpireDate() {
         return expireDate;

@@ -1,15 +1,13 @@
 package sbt.data;
 
-import org.apache.log4j.Logger;
-
 public class LoginInfo {
+    private String login;
+    private String password;
 
-    private static final Logger logger = Logger.getLogger(LoginInfo.class);
+    public LoginInfo() {
+    }
 
-    private final String login;
-    private final String password;
-
-    public LoginInfo(final String login, final String password) {
+    public LoginInfo(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -21,4 +19,8 @@ public class LoginInfo {
     public String getPassword() {
         return password;
     }
+
+    public void setLogin(String login) { this.login = login; }
+
+    public void setPassword(String password) { this.password = password; }
 }

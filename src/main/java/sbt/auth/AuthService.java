@@ -9,6 +9,7 @@ import sbt.data.Account;
 import sbt.data.LoginInfo;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 
 @Service
 public class AuthService {
@@ -17,10 +18,13 @@ public class AuthService {
     @Value("${jwt.secret}")
     private String secret;
 
-    public String authenticate(LoginInfo info) {
+    public String authenticate(LoginInfo info) throws UnsupportedEncodingException {
         logger.info("authenticating...");
-        Account user = null;
+        Account user = new Account();
 
+        user.setLogin("ololo");
+        user.setPassword("olololololol");
+        user.setExpireDate(new Timestamp(0));
         //ToDo request to DB for user Account
 
         String token = null;
@@ -28,19 +32,14 @@ public class AuthService {
         return token;
     }
 
-    private String genJWT(Account user) {
+    private String genJWT(Account user) throws UnsupportedEncodingException {
         logger.info("generating JWT token...");
         String token = null;
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            token = JWT.create()
-                    .withClaim("login", user.getLogin())
-                    .withClaim("expireDate", user.getExpireDate())
-                    .sign(algorithm);
-        } catch (UnsupportedEncodingException e) {
-            logger.error("error while generating JWT token:", e);
-            e.printStackTrace();
-        }
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+        token = JWT.create()
+                .withClaim("login", user.getLogin())
+                .withClaim("expireDate", user.getExpireDate())
+                .sign(algorithm);
         return token;
     }
 }
