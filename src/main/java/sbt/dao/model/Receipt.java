@@ -53,4 +53,28 @@ public class Receipt {
     public Long getCategory() {
         return category;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCoockingTime(String coockingTime) {
+        this.coockingTime = coockingTime;
+    }
+
+    public void setCalories(Long calories) {
+        this.calories = calories;
+    }
+
+    public void setCategory(Long category) {
+        this.category = category;
+    }
 }

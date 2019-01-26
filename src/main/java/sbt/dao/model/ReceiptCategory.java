@@ -25,4 +25,12 @@ public class ReceiptCategory {
     public Long getIdCategory() {
         return idCategory;
     }
+
+    public void setIdReceipt(Long idReceipt) {
+        this.idReceipt = idReceipt;
+    }
+
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
+    }
 }

@@ -24,4 +24,12 @@ public class Category {
     public String getCategoryName() {
         return categoryName;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

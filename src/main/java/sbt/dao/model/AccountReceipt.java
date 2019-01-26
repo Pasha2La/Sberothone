@@ -25,4 +25,12 @@ public class AccountReceipt {
     public Long getIdReceipt() {
         return idReceipt;
     }
+
+    public void setIdAccount(Long idAccount) {
+        this.idAccount = idAccount;
+    }
+
+    public void setIdReceipt(Long idReceipt) {
+        this.idReceipt = idReceipt;
+    }
 }

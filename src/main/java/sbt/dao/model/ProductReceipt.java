@@ -31,4 +31,16 @@ public class ProductReceipt {
     public Long getProductCount() {
         return productCount;
     }
+
+    public void setIdReceipt(Long idReceipt) {
+        this.idReceipt = idReceipt;
+    }
+
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public void setProductCount(Long productCount) {
+        this.productCount = productCount;
+    }
 }
