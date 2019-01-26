@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import sbt.dao.Dao;
 
 import javax.sql.ConnectionPoolDataSource;
 import javax.sql.DataSource;
@@ -22,6 +24,8 @@ import javax.xml.crypto.Data;
  */
 @Configuration
 public class DBConnection {
+    private static final Logger logger = Logger.getLogger(DBConnection.class);
+
 
     @Value("${db.url}")
     private String url;
