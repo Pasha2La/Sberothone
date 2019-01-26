@@ -12,4 +12,7 @@ public interface Dao {
                                         String healthy);
 */
     List<Account> example();
+
+    void update(String sqlCommand);
+    Account getAccountByLogin(String login);
 }

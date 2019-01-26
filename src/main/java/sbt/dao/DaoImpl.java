@@ -110,6 +110,16 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     }
 
     @Override
+    public Account getAccountByLogin(String login) {
+        String sql = "select * from sberfood_account where c_login = ?";
+        return getJdbcTemplate().queryForObject(
+                sql,
+                new Object[]{login},
+                new AccountMapper()
+        );
+    }
+
+    @Override
     public List<Account> example() {
         String sql = "select * from sberfood_account where n_id = ?";
         List<Account> accounts = getJdbcTemplate().query(
@@ -170,6 +180,11 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
 
         return accounts;
     }*/
+
+    @Override
+    public void update(String sqlCommand) {
+        getJdbcTemplate().update(sqlCommand);
+    }
 
     public AccountRepository getAccountRepository() {
         return accountRepository;

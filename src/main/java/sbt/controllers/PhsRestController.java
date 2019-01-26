@@ -28,7 +28,7 @@ public class PhsRestController {
     private static final Logger logger = Logger.getLogger(PhsRestController.class);
 
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
     @Autowired
     DaoImpl dao;
@@ -36,8 +36,10 @@ public class PhsRestController {
     @RequestMapping("/login")
     public String login(@RequestBody LoginInfo loginInfo, HttpServletResponse response) {
         try {
+            logger.info(loginInfo);
             String token = authService.authenticate(loginInfo);
             Cookie jwt = new Cookie("jwt", token);
+            logger.info(String.format("jw: %s",token));
             response.addCookie(jwt);
             JSONObject resp = new JSONObject();
             int code = 200;
@@ -47,6 +49,24 @@ public class PhsRestController {
             logger.error(String.format("Error while authenticating user: %s", loginInfo.getLogin()), e);
             return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
         }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(@RequestBody LoginInfo info, HttpServletResponse response) {
+        try {
+            String token = authService.authenticate(info);
+
+            Cookie jwtRemove = new Cookie("jwt", token);
+            jwtRemove.setMaxAge(0);
+            response.addCookie(jwtRemove);
+        } catch (Exception e) {
+            logger.error("Can't logout user" + e.getMessage());
+            return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
+        }
+
+        JSONObject resp = new JSONObject();
+        resp.append("code", 200);
+        return resp.toString();
     }
 
     @RequestMapping("/verifyToken")

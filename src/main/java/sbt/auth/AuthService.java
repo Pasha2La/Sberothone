@@ -10,8 +10,11 @@ import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.PlainJWT;
 import org.apache.log4j.Logger;
 import com.auth0.jwt.JWT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import sbt.dao.Dao;
+import sbt.dao.DaoImpl;
 import sbt.dao.model.Account;
 import sbt.data.LoginInfo;
 
@@ -23,18 +26,15 @@ import java.text.ParseException;
 public class AuthService {
     private static final Logger logger = Logger.getLogger(AuthService.class);
 
+    @Autowired
+    private Dao dao;
+
     @Value("${jwt.secret}")
     private String secret;
 
     public String authenticate(LoginInfo info) throws UnsupportedEncodingException {
         logger.info("Authenticating...");
-        Account user = new Account();
-
-        user.setLogin("ololo");
-        user.setPassword("olololololol");
-        user.setExpireDate(new Timestamp(0));
-        //ToDo request to DB for user Account
-
+        Account user = dao.getAccountByLogin(info.getLogin());
         String token = null;
         token = genJWT(user);
         return token;
@@ -42,13 +42,12 @@ public class AuthService {
 
     private String genJWT(Account user) throws UnsupportedEncodingException {
         logger.info("Generating JWT token...");
-        String token = null;
+
         Algorithm algorithm = Algorithm.HMAC256(secret);
-        token = JWT.create()
+        return JWT.create()
                 .withClaim("login", user.getLogin())
                 .withClaim("expireDate", user.getExpireDate())
                 .sign(algorithm);
-        return token;
     }
 
     public boolean verifyJWT(String jwt) throws UnsupportedEncodingException, ParseException, JOSEException {
