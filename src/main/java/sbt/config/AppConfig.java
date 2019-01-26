@@ -33,6 +33,8 @@ public class AppConfig {
         ds.setJdbcUrl(url);
         ds.setUsername(user);
         ds.setPassword(password);
+
+        ds.setConnectionTestQuery("SELECT '1' as test_value");
         return ds;
     }
 }
