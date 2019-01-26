@@ -18,7 +18,7 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     private DataSource dataSource;
 
     @Autowired
-    private AccountRepository account;
+    private AccountRepository accountRepository;
     @Autowired
     private AccountReceiptRepository accountReceiptRepository;
     @Autowired
