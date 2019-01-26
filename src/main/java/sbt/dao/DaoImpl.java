@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class DaoImpl extends JdbcDaoSupport implements Dao {
@@ -46,6 +47,7 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     public void postConstruct() {
         setDataSource(hikariDataSource);
 
+        example();
 
         //можно по id
         //accountRepository.deleteById(345L);
@@ -63,11 +65,8 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         accountRepository.save(testAccount);
 
 
-
         //delete
         accountRepository.delete(testAccount);
-
-
 
 
         Iterable<Account> accounts = accountRepository.findAll();
@@ -107,7 +106,42 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         }
 
 
+    }
 
+    @Override
+    public List<Account> example() {
+        String sql = "select * from sberfood_account where n_id = ?";
+        List<Account> accounts = getJdbcTemplate().query(
+                sql,
+                new Object[]{1},
+                (rs, rowNum) ->
+                        new Account(
+                                rs.getLong(1),
+                                rs.getString(2),
+                                rs.getString(3),
+                                rs.getBoolean(4),
+                                rs.getTimestamp(5))
+
+
+        );
+
+        String sql1 = "select * from sberfood_account where n_id = ?";
+        List<Account> accounts1 = getJdbcTemplate().query(
+                sql1,
+                (rs, rowNum) ->
+                        new Account(
+                                rs.getLong(1),
+                                rs.getString(2),
+                                rs.getString(3),
+                                rs.getBoolean(4),
+                                rs.getTimestamp(5))
+
+
+        );
+
+        System.out.println(accounts);
+
+        return accounts;
     }
 
     public AccountRepository getAccountRepository() {

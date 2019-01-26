@@ -1,7 +1,10 @@
 package sbt.dao;
 
+import sbt.dao.model.Account;
 import sbt.data.LoginInfo;
 
-public interface Dao {
+import java.util.List;
 
+public interface Dao {
+    List<Account> example();
 }
