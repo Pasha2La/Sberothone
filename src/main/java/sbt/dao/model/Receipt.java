@@ -28,6 +28,17 @@ public class Receipt {
     public Receipt() {
     }
 
+    public Receipt(Long id, String name, String description, String coockingTime, Long calories, Long category, String healthy, Long viewCount) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.coockingTime = coockingTime;
+        this.calories = calories;
+        this.category = category;
+        this.healthy = healthy;
+        this.viewCount = viewCount;
+    }
+
 
     public Receipt(String name, String description, String coockingTime, Long calories, Long category, String healthy, Long viewCount) {
         this.name = name;

@@ -24,6 +24,11 @@ public class Product {
         this.measureType = measureType;
     }
 
+    public Product(String name, String measureType) {
+        this.name = name;
+        this.measureType = measureType;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
