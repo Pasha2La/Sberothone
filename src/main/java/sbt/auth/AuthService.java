@@ -1,6 +1,13 @@
 package sbt.auth;
 
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Verification;
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jose.JWSObject;
+import com.nimbusds.jose.JWSVerifier;
+import com.nimbusds.jose.crypto.MACVerifier;
+import com.nimbusds.jwt.PlainJWT;
 import org.apache.log4j.Logger;
 import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +17,7 @@ import sbt.data.LoginInfo;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 
 @Service
 public class AuthService {
@@ -19,7 +27,7 @@ public class AuthService {
     private String secret;
 
     public String authenticate(LoginInfo info) throws UnsupportedEncodingException {
-        logger.info("authenticating...");
+        logger.info("Authenticating...");
         Account user = new Account();
 
         user.setLogin("ololo");
@@ -33,7 +41,7 @@ public class AuthService {
     }
 
     private String genJWT(Account user) throws UnsupportedEncodingException {
-        logger.info("generating JWT token...");
+        logger.info("Generating JWT token...");
         String token = null;
         Algorithm algorithm = Algorithm.HMAC256(secret);
         token = JWT.create()
@@ -41,5 +49,12 @@ public class AuthService {
                 .withClaim("expireDate", user.getExpireDate())
                 .sign(algorithm);
         return token;
+    }
+
+    public boolean verifyJWT(String jwt) throws UnsupportedEncodingException, ParseException, JOSEException {
+        logger.info("Verifying JWT token...");
+        JWSObject jwsObject = JWSObject.parse(jwt);
+        JWSVerifier verifier = new MACVerifier(secret);
+        return jwsObject.verify(verifier);
     }
 }
