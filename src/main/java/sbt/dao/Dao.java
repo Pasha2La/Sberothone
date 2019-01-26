@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface Dao {
     List<Account> example();
+    Account getAccountByLogin(String login);
 }

@@ -33,8 +33,10 @@ public class PhsRestController {
     @RequestMapping("/login")
     public String login(@RequestBody LoginInfo loginInfo, HttpServletResponse response) {
         try {
+            logger.info(loginInfo);
             String token = authService.authenticate(loginInfo);
             Cookie jwt = new Cookie("jwt", token);
+            logger.info(String.format("jw: %s",token));
             response.addCookie(jwt);
             JSONObject resp = new JSONObject();
             int code = 200;

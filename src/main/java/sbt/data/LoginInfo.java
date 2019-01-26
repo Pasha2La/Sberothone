@@ -17,6 +17,14 @@ public class LoginInfo {
         return login;
     }
 
+    @Override
+    public String toString() {
+        return "LoginInfo{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public String getPassword() {
         return password;
     }
