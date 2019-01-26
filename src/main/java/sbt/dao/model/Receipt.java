@@ -28,6 +28,7 @@ public class Receipt {
     public Receipt() {
     }
 
+
     public Receipt(String name, String description, String coockingTime, Long calories, Long category, String healthy, Long viewCount) {
         this.name = name;
         this.description = description;
