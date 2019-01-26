@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Search</title>
+    <title>Login</title>
 </head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
@@ -20,9 +20,19 @@
     <div id="header"><button id = "menu_button" onclick="openMenu()"></button></div>
     <div id="menu">
         <p class="menu_point"><a th:href="@{'/'}">Поиск блюд</a></p> <br/>
-        <p class="menu_point"><a th:href="@{'/account'}">Личный кабинет</a></p>
     </div>
     <div id="content">
+        <form class="auth_form">
+            <p class="form_field">
+                <input type="text" name="Login" value="Логин"/>
+            </p>
+            <p class="form_field">
+                <input type="text" name="Password" value="Пароль">
+            </p>
+            <p class="submit">
+                <button type="submit" name="Найти"></button>
+            </p>
+        </form>
     </div>
 </div>
 </body>
