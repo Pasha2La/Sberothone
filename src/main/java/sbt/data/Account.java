@@ -8,13 +8,17 @@ public class Account {
 
     private int phoneNumber;
 
+    private final String login;
+    private final String password;
     private final String firstName;
     private final String secondName;
     private final String surname;
 
     private int balance;
 
-    public Account(String firstName, String secondName, String surname) {
+    public Account(String login, String password, String firstName, String secondName, String surname) {
+        this.login = login;
+        this.password = password;
         this.firstName = firstName;
         this.secondName = secondName;
         this.surname = surname;
@@ -34,5 +38,9 @@ public class Account {
 
     public int getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public int getBalance() {
+        return balance;
     }
 }
