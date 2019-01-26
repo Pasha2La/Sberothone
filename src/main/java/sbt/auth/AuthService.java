@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import sbt.data.Account;
 import sbt.data.LoginInfo;
 
 import java.io.UnsupportedEncodingException;
