@@ -36,7 +36,6 @@ public class AuthService {
             token = JWT.create()
                     .withClaim("login", user.getLogin())
                     .withClaim("FirstName", user.getFirstName())
-                    .withClaim("PhoneNumber", user.getPhoneNumber())
                     .withClaim("SecondName", user.getSecondName())
                     .withClaim("Surname", user.getSurname())
                     .sign(algorithm);
