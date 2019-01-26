@@ -139,6 +139,38 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         return accounts;
     }
 
+   /* @Override
+    public List<Receipt> filteredSearch(List<String> products,
+                                        List<String> categories,
+                                        String healthy) {
+        String sql = "select * from sberfood_receipt where c_healthy = ?";
+        List<Account> accounts = getJdbcTemplate().query(
+                sql,
+                new Object[]{1},
+                new AccountMapper()
+
+        );
+
+        String sql1 = "select * from sberfood_account where n_id = 1";
+        List<Account> accounts1 = getJdbcTemplate().query(
+                sql1,
+                (rs, rowNum) ->
+                        new Account(
+                                rs.getLong(1),
+                                rs.getString(2),
+                                rs.getString(3),
+                                rs.getBoolean(4),
+                                rs.getTimestamp(5))
+
+
+        );
+
+        System.out.println(accounts);
+        System.out.println(accounts1);
+
+        return accounts;
+    }*/
+
     @Override
     public void update(String sqlCommand) {
         getJdbcTemplate().update(sqlCommand);

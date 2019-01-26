@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sbt.auth.AuthService;
 import sbt.dao.DaoImpl;
+import sbt.data.BaseInfo;
 import sbt.data.LoginInfo;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -82,11 +84,17 @@ public class PhsRestController {
 
     }
 
-    @RequestMapping("/search")
-    public String verifyToken(@RequestParam(value = "products") List<String> products,
+/*
+    @RequestMapping("/")
+    public String search(@RequestParam(value = "products") List<String> products,
                               @RequestParam(value = "categories") List<String> categories,
                               @RequestParam(value = "healthy") String healthy) {
+        dao.getRec
+    }
+*/
 
-        return "";
+    @RequestMapping("/")
+    public BaseInfo getCategories() {
+        return new BaseInfo(dao.getCategoryRepository().findAll(), dao.getProductRepository().findAll());
     }
 }
