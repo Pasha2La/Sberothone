@@ -1,17 +1,30 @@
 package sbt.dao.model;
 
-import org.apache.log4j.Logger;
-
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Account {
+@Entity
+@Table(name="sberfood_account")
+public class Account implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="n_id")
     private Long id;
+    @Column(name="c_login")
     private String login;
+    @Column(name="c_password")
     private String password;
+    @Column(name="b_payed")
     private Boolean isPayed;
+    @Column(name="d_expire_date")
     private Timestamp expireDate;
 
+
+    public Account() {
+    }
 
     public Account(Long id, String login, String password, Boolean isPayed, Timestamp expireDate) {
         this.id = id;

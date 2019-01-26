@@ -1,23 +1,39 @@
 package sbt.dao.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="sberfood_receipt")
 public class Receipt {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="n_id")
     private Long id;
+    @Column(name="c_name")
     private String name;
+    @Column(name="c_description")
     private String description;
+    @Column(name="c_coocking_time")
     private String coockingTime;
+    @Column(name="n_calories")
     private Long calories;
+    @Column(name="n_category")
     private Long category;
-    private Boolean isHealthy;
+    @Column(name="c_healthy")
+    private String healthy;
 
-    public Receipt(Long id, String name, String description, String coockingTime, Long calories, Long category, Boolean isHealthy) {
+    public Receipt() {
+    }
+
+    public Receipt(Long id, String name, String description, String coockingTime, Long calories, Long category, String healthy) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.coockingTime = coockingTime;
         this.calories = calories;
         this.category = category;
-        this.isHealthy = isHealthy;
+        this.healthy = healthy;
     }
 
     @Override
@@ -29,7 +45,7 @@ public class Receipt {
                 ", coockingTime='" + coockingTime + '\'' +
                 ", calories=" + calories +
                 ", category=" + category +
-                ", isHealthy=" + isHealthy +
+                ", healthy=" + healthy +
                 '}';
     }
 
@@ -81,11 +97,11 @@ public class Receipt {
         this.category = category;
     }
 
-    public Boolean getHealthy() {
-        return isHealthy;
+    public String getHealthy() {
+        return healthy;
     }
 
-    public void setHealthy(Boolean healthy) {
-        isHealthy = healthy;
+    public void setHealthy(String healthy) {
+        this.healthy = healthy;
     }
 }

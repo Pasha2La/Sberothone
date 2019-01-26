@@ -1,8 +1,20 @@
 package sbt.dao.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="sberfood_category")
 public class Category {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="n_id")
     private Long id;
+    @Column(name="c_category_name")
     private String categoryName;
+
+    public Category() {
+    }
 
     public Category(Long id, String categoryName) {
         this.id = id;

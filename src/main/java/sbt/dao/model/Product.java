@@ -1,10 +1,22 @@
 package sbt.dao.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="sberfood_product")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="n_id")
     private Long id;
+    @Column(name="c_name")
     private String name;
+    @Column(name="c_measure_type")
     private String measureType;
+
+    public Product() {
+    }
 
     public Product(Long id, String name, String measureType) {
         this.id = id;

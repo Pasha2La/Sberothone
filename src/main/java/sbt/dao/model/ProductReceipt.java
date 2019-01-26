@@ -1,9 +1,24 @@
 package sbt.dao.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="sberfood_product_receipt")
 public class ProductReceipt {
+
+    @Id
+    @Column(name="n_receipt_id")
     private Long idReceipt;
+    @Column(name="n_product_id")
     private Long idProduct;
+    @Column(name="n_product_count")
     private Long productCount;
+
+    public ProductReceipt() {
+    }
 
     public ProductReceipt(Long idReceipt, Long idProduct, Long productCount) {
         this.idReceipt = idReceipt;

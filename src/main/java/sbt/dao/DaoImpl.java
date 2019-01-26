@@ -2,10 +2,11 @@ package sbt.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import sbt.dao.model.*;
 import sbt.dao.repository.*;
-import sbt.data.LoginInfo;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -15,7 +16,7 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     private static final Logger logger = Logger.getLogger(DaoImpl.class);
 
     @Autowired
-    private DataSource dataSource;
+    private DataSource hikariDataSource;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -29,6 +30,8 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     private ReceiptCategoryRepository receiptCategoryRepository;
     @Autowired
     private ReceiptRepository receiptRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
 
     /*
@@ -39,7 +42,45 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
 
     @PostConstruct
     public void postConstruct() {
-        setDataSource(dataSource);
+        setDataSource(hikariDataSource);
+        Iterable<Account> accounts = accountRepository.findAll();
+
+        for (Account account : accounts) {
+            System.out.println(account);
+        }
+
+        Iterable<Receipt> receipts = receiptRepository.findAll();
+        for (Receipt receipt : receipts) {
+            System.out.println(receipt);
+        }
+
+        Iterable<Product> products = productRepository.findAll();
+        for (Product product : products) {
+            System.out.println(product);
+        }
+
+        Iterable<Category> categories = categoryRepository.findAll();
+        for (Category category : categories) {
+            System.out.println(category);
+        }
+
+        Iterable<AccountReceipt> accountReceipts = accountReceiptRepository.findAll();
+        for (AccountReceipt accountReceipt : accountReceipts) {
+            System.out.println(accountReceipt);
+        }
+
+        Iterable<ProductReceipt> productReceipts = productReceiptRepository.findAll();
+        for (ProductReceipt productReceipt : productReceipts) {
+            System.out.println(productReceipt);
+        }
+
+        Iterable<ReceiptCategory> receiptCategories = receiptCategoryRepository.findAll();
+        for (ReceiptCategory receiptCategory : receiptCategories) {
+            System.out.println(receiptCategory);
+        }
+
+
+
     }
 
 
