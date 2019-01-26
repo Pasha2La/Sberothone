@@ -8,24 +8,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-    @Value("${db.url}")
-    private String url;
-
-    @Value("${db.baseName}")
-    private String baseName;
-
-    @Value("${db.user}")
-    private String user;
-
-    @Value("${db.password}")
-    private String password;
-
-    @Value("${driver.class.name}")
-    private String driverClassName;
-
-
     @Bean
-    public HikariDataSource dataSource() {
+    public HikariDataSource dataSource(@Value("${db.url}") String url,
+                                       @Value("${db.baseName}") String baseName,
+                                       @Value("${db.user}") String user,
+                                       @Value("${db.password}") String password,
+                                       @Value("${driver.class.name}") String driverClassName) {
         final HikariDataSource ds = new HikariDataSource();
 
         ds.setMaximumPoolSize(10);
