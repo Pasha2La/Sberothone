@@ -14,8 +14,8 @@ public class Receipt {
     private String name;
     @Column(name = "c_description")
     private String description;
-    @Column(name = "c_coocking_time")
-    private String coockingTime;
+    @Column(name = "c_cooking_time")
+    private String cookingTime;
     @Column(name = "n_calories")
     private Long calories;
     @Column(name = "n_category")
@@ -28,11 +28,11 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(Long id, String name, String description, String coockingTime, Long calories, Long category, String healthy, Long viewCount) {
+    public Receipt(Long id, String name, String description, String cookingTime, Long calories, Long category, String healthy, Long viewCount) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.coockingTime = coockingTime;
+        this.cookingTime = cookingTime;
         this.calories = calories;
         this.category = category;
         this.healthy = healthy;
@@ -40,10 +40,10 @@ public class Receipt {
     }
 
 
-    public Receipt(String name, String description, String coockingTime, Long calories, Long category, String healthy, Long viewCount) {
+    public Receipt(String name, String description, String cookingTime, Long calories, Long category, String healthy, Long viewCount) {
         this.name = name;
         this.description = description;
-        this.coockingTime = coockingTime;
+        this.cookingTime = cookingTime;
         this.calories = calories;
         this.category = category;
         this.healthy = healthy;
@@ -56,7 +56,7 @@ public class Receipt {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", coockingTime='" + coockingTime + '\'' +
+                ", cookingTime='" + cookingTime + '\'' +
                 ", calories=" + calories +
                 ", category=" + category +
                 ", healthy='" + healthy + '\'' +
@@ -88,12 +88,12 @@ public class Receipt {
         this.description = description;
     }
 
-    public String getCoockingTime() {
-        return coockingTime;
+    public String getCookingTime() {
+        return cookingTime;
     }
 
-    public void setCoockingTime(String coockingTime) {
-        this.coockingTime = coockingTime;
+    public void setCookingTime(String cookingTime) {
+        this.cookingTime = cookingTime;
     }
 
     public Long getCalories() {

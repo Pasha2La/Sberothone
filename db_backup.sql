@@ -29,8 +29,8 @@ create table sberfood_account
 	n_id bigint identity
 		constraint sberfood_account_pk
 			primary key nonclustered,
-	c_login text not null,
-	c_password text not null,
+	c_login varchar(120) not null,
+	c_password varchar(120) not null,
 	b_payed bit not null,
 	d_expire_date datetime
 )
@@ -45,7 +45,7 @@ create table sberfood_category
 	n_id bigint identity
 		constraint sberfood_category_pk
 			primary key nonclustered,
-	c_category_name text not null
+	c_category_name varchar(max) not null
 )
 go
 
@@ -58,8 +58,8 @@ create table sberfood_product
 	n_id bigint identity
 		constraint sberfood_product_pk
 			primary key nonclustered,
-	c_name text not null,
-	c_measure_type text not null
+	c_name varchar(max) not null,
+	c_measure_type varchar(120) not null
 )
 go
 
@@ -72,12 +72,12 @@ create table sberfood_receipt
 	n_id bigint identity
 		constraint sberfood_receipts_pk
 			primary key nonclustered,
-	c_name text not null,
-	c_description text not null,
-	c_coocking_time text,
+	c_name varchar(max) not null,
+	c_description varchar(max) not null,
+	c_cooking_time varchar(max),
 	n_calories bigint,
 	n_category bigint,
-	c_healthy text,
+	c_healthy varchar(120),
 	n_view_count bigint default 0 not null
 )
 go
