@@ -1,11 +1,9 @@
 package sbt.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by durachenko-sv on 26.01.2019.
@@ -15,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class PhsRestController {
     private static final Logger logger = Logger.getLogger(PhsRestController.class);
 
-
-    @RequestMapping("/login")
-    public String login() {
-        String token = null;
-        return token;
-    }
-
     @Autowired
     public PhsRestController() throws Exception {
 
+    }
+
+    @RequestMapping("/login")
+    public String login(@RequestParam(value = "login") String loginStr,
+                        @RequestParam(value = "password") String passwordStr) {
+        String token = null;
+        return token;
     }
 }
