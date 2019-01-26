@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sbt.auth.AuthService;
 import sbt.dao.DaoImpl;
+import sbt.dao.model.Receipt;
 import sbt.data.BaseInfo;
 import sbt.data.LoginInfo;
 
@@ -66,17 +67,4 @@ public class PhsRestController {
 
     }
 
-/*
-    @RequestMapping("/")
-    public String search(@RequestParam(value = "products") List<String> products,
-                              @RequestParam(value = "categories") List<String> categories,
-                              @RequestParam(value = "healthy") String healthy) {
-        dao.getRec
-    }
-*/
-
-    @RequestMapping("/")
-    public BaseInfo getCategories() {
-        return new BaseInfo(dao.getCategoryRepository().findAll(), dao.getProductRepository().findAll());
-    }
 }

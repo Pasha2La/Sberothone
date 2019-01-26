@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sbt.dao.DaoImpl;
+import sbt.data.BaseInfo;
 
 import java.security.Principal;
 import java.util.List;
@@ -38,4 +39,8 @@ public class PhsViewController {
         return "account";
     }
 
+    @RequestMapping("/")
+    public BaseInfo getCategories() {
+        return new BaseInfo(dao.getCategoryRepository().findAll(), dao.getProductRepository().findAll());
+    }
 }
