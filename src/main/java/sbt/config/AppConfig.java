@@ -1,18 +1,12 @@
-package sbt.utils;
+package sbt.config;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Created by durachenko-sv on 26.01.2019.
- */
 @Configuration
-public class DBConnection {
-    private static final Logger logger = Logger.getLogger(DBConnection.class);
-
+public class AppConfig {
 
     @Value("${db.url}")
     private String url;
@@ -41,6 +35,4 @@ public class DBConnection {
         ds.setPassword(password);
         return ds;
     }
-
-
 }
