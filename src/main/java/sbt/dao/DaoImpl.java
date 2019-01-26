@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import sbt.dao.mapper.AccountMapper;
 import sbt.dao.model.*;
 import sbt.dao.repository.*;
 
@@ -114,18 +115,11 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         List<Account> accounts = getJdbcTemplate().query(
                 sql,
                 new Object[]{1},
-                (rs, rowNum) ->
-                        new Account(
-                                rs.getLong(1),
-                                rs.getString(2),
-                                rs.getString(3),
-                                rs.getBoolean(4),
-                                rs.getTimestamp(5))
-
+                new AccountMapper()
 
         );
 
-        String sql1 = "select * from sberfood_account where n_id = ?";
+        String sql1 = "select * from sberfood_account where n_id = 1";
         List<Account> accounts1 = getJdbcTemplate().query(
                 sql1,
                 (rs, rowNum) ->
@@ -140,6 +134,7 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         );
 
         System.out.println(accounts);
+        System.out.println(accounts1);
 
         return accounts;
     }
