@@ -25,8 +25,6 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account() {
-    }
 
     public Account(Long id, String login, String password, Boolean isPayed, Timestamp expireDate) {
         this.id = id;
