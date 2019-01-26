@@ -29,10 +29,10 @@ public class PhsRestController {
             Cookie jwt = new Cookie("jwt", token);
             response.addCookie(jwt);
             JSONObject resp = new JSONObject();
-            resp.append("code",200);
+            resp.append("code", 200);
             return resp.toString();
         } catch (Exception e) {
-            logger.error("error while doing login...", e);
+            logger.error(String.format("Error while authenticating user: %s", loginInfo.getLogin()), e);
             return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
         }
     }
