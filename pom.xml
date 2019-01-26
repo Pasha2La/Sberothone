@@ -23,6 +23,14 @@
         </dependency>
 
 
+        <!--database connection pool-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+
         <!-- jdbc dependencies -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
