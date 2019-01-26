@@ -4,7 +4,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import sbt.data.Account;
+import sbt.dao.repository.AccountRepository;
+import sbt.dao.repository.ReceiptRepository;
 import sbt.data.LoginInfo;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,9 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private ReceiptRepository receiptRepository;
+
     /*
         logger.info("post construct");
         logger.error("post construct");
@@ -26,46 +30,7 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     @PostConstruct
     public void postConstruct() {
         setDataSource(dataSource);
-
     }
 
-    @Override
-    public Account getAccount() {
-        return null;
-    }
 
-    @Override
-    public boolean createAccount() {
-        return false;
-    }
-
-    @Override
-    public boolean updateAccount() {
-        return false;
-    }
-
-    @Override
-    public boolean deleteAccount() {
-        return false;
-    }
-
-    @Override
-    public LoginInfo getLoginInfo() {
-        return null;
-    }
-
-    @Override
-    public boolean createLoginInfo() {
-        return false;
-    }
-
-    @Override
-    public boolean updateLoginInfo() {
-        return false;
-    }
-
-    @Override
-    public boolean deleteLoginInfo() {
-        return false;
-    }
 }
