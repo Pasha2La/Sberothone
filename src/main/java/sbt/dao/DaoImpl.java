@@ -82,5 +82,31 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
 
     }
 
+    public AccountRepository getAccountRepository() {
+        return accountRepository;
+    }
 
+    public AccountReceiptRepository getAccountReceiptRepository() {
+        return accountReceiptRepository;
+    }
+
+    public ProductReceiptRepository getProductReceiptRepository() {
+        return productReceiptRepository;
+    }
+
+    public ProductRepository getProductRepository() {
+        return productRepository;
+    }
+
+    public ReceiptCategoryRepository getReceiptCategoryRepository() {
+        return receiptCategoryRepository;
+    }
+
+    public ReceiptRepository getReceiptRepository() {
+        return receiptRepository;
+    }
+
+    public CategoryRepository getCategoryRepository() {
+        return categoryRepository;
+    }
 }
