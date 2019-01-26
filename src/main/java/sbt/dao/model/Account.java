@@ -12,6 +12,8 @@ public class Account {
     private Boolean isPayed;
     private Timestamp expireDate;
 
+    public Account() {
+    }
 
     public Account(Long id, String login, String password, Boolean isPayed, Timestamp expireDate) {
         this.id = id;
