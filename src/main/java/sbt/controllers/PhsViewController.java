@@ -24,4 +24,9 @@ public class PhsViewController {
         return "index";
     }
 
+    @RequestMapping(value = "/auth", method = RequestMethod.GET)
+    public String auth(Model model, Principal principal) {
+        return "auth";
+    }
+
 }
