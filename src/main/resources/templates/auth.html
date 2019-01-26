@@ -3,6 +3,7 @@
     <title>Login</title>
 </head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/auth.css}"/>
 <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
 <script>
     function openMenu() {
@@ -14,6 +15,33 @@
             menu.style.display = 'none';
         }
     }
+
+    function checkAuth(e) {
+        var $form = $('#auth_form');
+        var status = null;
+        var login = $form[0][0].value;
+        var password = $form[0][1].value;
+        var info = {
+            "login": login,
+            "password": password
+        };
+        $.ajax({
+            type: $form.attr('method'),
+            url: $form.attr('action'),
+            data: JSON.stringify(info),
+            contentType: "application/json",
+            async: false,
+            success: function (data) {
+                status = JSON.parse(data).code[0];
+            }
+        });
+        if(status == 200) {
+            window.location.href = "/account?login=" + login;
+        } else {
+            alert("fail");
+        }
+        e.preventDefault();
+    }
 </script>
 <body>
 <div class="main">
@@ -22,15 +50,17 @@
         <p class="menu_point"><a th:href="@{'/'}">Поиск блюд</a></p> <br/>
     </div>
     <div id="content">
-        <form class="auth_form">
+        <form id="auth_form" method="post" action="/login" onsubmit="checkAuth(event)">
             <p class="form_field">
-                <input type="text" name="Login" value="Логин"/>
+                <span>Логин</span> <br/>
+                <input type="text" name="login"/>
             </p>
             <p class="form_field">
-                <input type="text" name="Password" value="Пароль">
+                <span>Пароль</span><br/>
+                <input type="text" name="password">
             </p>
             <p class="submit">
-                <button type="submit" name="Найти"></button>
+                <button type="submit" name="Найти">Поиск</button>
             </p>
         </form>
     </div>

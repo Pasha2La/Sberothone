@@ -27,7 +27,9 @@ body {
     height: 95%;
     background: #2f2f2f;
     margin: 0;
+    margin-right: 0;
     display: none;
+    float: left;
 }
 
 #menu p {
