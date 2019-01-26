@@ -2,7 +2,6 @@ package sbt.controllers;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RestController;
-import sbt.dao.Dao;
 
 /**
  * Created by durachenko-sv on 26.01.2019.
