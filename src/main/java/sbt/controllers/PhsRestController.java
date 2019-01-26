@@ -1,5 +1,6 @@
 package sbt.controllers;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class PhsRestController {
+    private static final Logger logger = Logger.getLogger(PhsRestController.class);
+
 
     /*@Autowired
     public PhsRestController() throws Exception {;}*/

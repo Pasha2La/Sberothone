@@ -1,6 +1,10 @@
 package sbt.data;
 
+import org.apache.log4j.Logger;
+
 public class Account {
+    private static final Logger logger = Logger.getLogger(Account.class);
+
 
     private int phoneNumber;
 
