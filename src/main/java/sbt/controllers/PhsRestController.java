@@ -7,12 +7,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sbt.auth.AuthService;
+import sbt.dao.DaoImpl;
 import sbt.data.LoginInfo;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * Created by durachenko-sv on 26.01.2019.
@@ -24,6 +26,9 @@ public class PhsRestController {
 
     @Autowired
     AuthService authService;
+
+    @Autowired
+    DaoImpl dao;
 
     @RequestMapping("/login")
     public String login(@RequestBody LoginInfo loginInfo, HttpServletResponse response) {
@@ -57,5 +62,13 @@ public class PhsRestController {
             return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
         }
 
+    }
+
+    @RequestMapping("/search")
+    public String verifyToken(@RequestParam(value = "products") List<String> products,
+                              @RequestParam(value = "categories") List<String> categories,
+                              @RequestParam(value = "healthy") String healthy) {
+
+        return "";
     }
 }
