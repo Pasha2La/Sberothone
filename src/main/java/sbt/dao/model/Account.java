@@ -22,6 +22,8 @@ public class Account implements Serializable {
     @Column(name="d_expire_date")
     private Timestamp expireDate;
 
+    public Account() {
+    }
 
     public Account() {
     }

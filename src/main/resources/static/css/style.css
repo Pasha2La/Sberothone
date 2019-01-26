@@ -1,0 +1,42 @@
+body {
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+}
+
+#header {
+    height: 5%;
+    margin: 0;
+    background: #2f2f2f;
+    display: flex;
+    align-items: center;
+}
+
+#menu_button {
+    background: url("/icons/menu.png");
+    height: 24px;
+    width: 24px;
+    border: 0;
+    outline: none;
+    margin-left: 4px;
+}
+
+#menu {
+    width: 100%;
+    max-width: 300px;
+    height: 95%;
+    background: #2f2f2f;
+    margin: 0;
+    display: none;
+}
+
+#menu p {
+    margin: 0;
+    text-align-last: center;
+}
+
+.menu_point a:link, .menu_point a:hover, .menu_point a:visited, .menu_point a{
+    color: white;
+    text-decoration: none;
+    margin: 0;
+}
