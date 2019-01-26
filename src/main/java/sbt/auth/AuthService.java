@@ -24,20 +24,18 @@ public class AuthService {
         //ToDo request to DB for user Account
 
         String token = null;
-
+        token = genJWT(user);
         return token;
     }
 
-    public String genJWT(Account user) {
+    private String genJWT(Account user) {
         logger.info("generating JWT token...");
         String token = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             token = JWT.create()
                     .withClaim("login", user.getLogin())
-                    .withClaim("FirstName", user.getFirstName())
-                    .withClaim("SecondName", user.getSecondName())
-                    .withClaim("Surname", user.getSurname())
+                    .withClaim("expireDate", user.getExpireDate())
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {
             logger.error("error while generating JWT token:", e);

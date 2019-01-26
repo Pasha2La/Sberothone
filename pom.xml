@@ -46,7 +46,11 @@
 
 
 
-
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180130</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
         <dependency>
