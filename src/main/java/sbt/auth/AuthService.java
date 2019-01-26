@@ -42,13 +42,12 @@ public class AuthService {
 
     private String genJWT(Account user) throws UnsupportedEncodingException {
         logger.info("Generating JWT token...");
-        String token = null;
+
         Algorithm algorithm = Algorithm.HMAC256(secret);
-        token = JWT.create()
+        return JWT.create()
                 .withClaim("login", user.getLogin())
                 .withClaim("expireDate", user.getExpireDate())
                 .sign(algorithm);
-        return token;
     }
 
     public boolean verifyJWT(String jwt) throws UnsupportedEncodingException, ParseException, JOSEException {

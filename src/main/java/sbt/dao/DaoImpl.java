@@ -139,6 +139,11 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         return accounts;
     }
 
+    @Override
+    public void update(String sqlCommand) {
+        getJdbcTemplate().update(sqlCommand);
+    }
+
     public AccountRepository getAccountRepository() {
         return accountRepository;
     }
