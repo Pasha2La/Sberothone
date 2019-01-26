@@ -11,9 +11,6 @@ import sbt.data.LoginInfo;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 
-/**
- * @author
- */
 @Service
 public class AuthService {
     private static final Logger logger = Logger.getLogger(AuthService.class);
@@ -22,7 +19,7 @@ public class AuthService {
     private String secret;
 
     public String authenticate(LoginInfo info) throws UnsupportedEncodingException {
-        logger.info(String.format("Authenticate starting for user %s", info.getLogin()));
+        logger.info("authenticating...");
         Account user = new Account();
 
         user.setLogin("ololo");
@@ -30,12 +27,13 @@ public class AuthService {
         user.setExpireDate(new Timestamp(0));
         //ToDo request to DB for user Account
 
-        String token = genJWT(user);
+        String token = null;
+        token = genJWT(user);
         return token;
     }
 
     private String genJWT(Account user) throws UnsupportedEncodingException {
-        logger.info(String.format("Generating JWT token for user %s", user.getLogin()));
+        logger.info("generating JWT token...");
         String token = null;
         Algorithm algorithm = Algorithm.HMAC256(secret);
         token = JWT.create()
