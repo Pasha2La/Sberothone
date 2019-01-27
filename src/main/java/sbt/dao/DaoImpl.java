@@ -2,11 +2,10 @@ package sbt.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
 import sbt.dao.mapper.AccountMapper;
+import sbt.dao.mapper.ReceiptMapper;
 import sbt.dao.mapper.ProductMapper;
 import sbt.dao.mapper.ReceiptMapper;
 import sbt.dao.model.*;
@@ -18,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DaoImpl extends JdbcDaoSupport implements Dao {
@@ -25,9 +25,6 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
 
     @Autowired
     private DataSource hikariDataSource;
-    @Autowired
-    @Qualifier("entityManagerFactory")
-    private LocalContainerEntityManagerFactoryBean entityManagerFactoryBean;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -147,6 +144,11 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     }
 
     @Override
+    public Optional<Receipt> getByIdReceipt(Long id) {
+        return getReceiptRepository().findById(id);
+    }
+
+    @Override
     public List<Account> example() {
         String sql = "select * from sberfood_account where n_id = ?";
         List<Account> accounts = getJdbcTemplate().query(
@@ -174,6 +176,15 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
         System.out.println(accounts1);
 
         return accounts;
+    }
+
+    @Override
+    public List<Receipt> getSortByView() {
+        String sql = "select * from sberfood_receipt order by n_view_count";
+        return getJdbcTemplate().query(
+                sql,
+                new ReceiptMapper()
+        );
     }
 
    /* @Override
