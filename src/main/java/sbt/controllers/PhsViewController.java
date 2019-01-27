@@ -40,7 +40,7 @@ public class PhsViewController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account(@CookieValue String jwt, Model model) {
+    public String account(@CookieValue(required = false) String jwt, Model model) {
         if(jwt==null) return "auth";
         try {
             authService.verifyJWT(jwt);
