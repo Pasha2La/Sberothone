@@ -4,18 +4,7 @@
 </head>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
-<script>
-    function openMenu() {
-        var menu = $('#menu')[0];
-        if(menu.style.display == 'none') {
-            console.dir(menu);
-            menu.style.display = 'block';
-        } else {
-            menu.style.display = 'none';
-        }
-    }
-
-</script>
+<script th:src="@{/js/shared.js}"></script>
 <body>
 <div class="main">
     <div id="header"><button id = "menu_button" onclick="openMenu()"></button></div>

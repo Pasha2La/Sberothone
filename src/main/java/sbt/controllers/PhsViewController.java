@@ -12,6 +12,7 @@ import sbt.data.BaseInfo;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by durachenko-sv on 26.01.2019.
@@ -35,12 +36,14 @@ public class PhsViewController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account(@RequestParam(value = "login") String login, Model model) {
+    public String account(Model model) {
         return "account";
     }
 
     @RequestMapping("/")
-    public BaseInfo getCategories() {
-        return new BaseInfo(dao.getCategoryRepository().findAll(), dao.getProductRepository().findAll());
+    public String getCategories(Model model) {
+        model.addAttribute("productList", dao.getProductRepository().findAll());
+        model.addAttribute("categoryList", dao.getCategoryRepository().findAll());
+        return "index";
     }
 }
