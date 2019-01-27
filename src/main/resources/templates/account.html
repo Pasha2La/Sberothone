@@ -13,6 +13,12 @@
         <p class="menu_point"><a th:href="@{'/account'}">Личный кабинет</a></p>
     </div>
     <div id="content">
+        <p th:text="'Логин: '+${userInfo.login}">text</p>
+        <p th:text="'Пароль: '+${userInfo.password}">text</p>
+        <div th:switch="${userInfo.isPayed}">
+            <p th:case="true" th:text="'Дата окончания подписки: '+${userInfo.expireDate}"></p>
+            <p th:case="*" th:text="'Купи подписку!'"></p>
+        </div>
     </div>
 </div>
 </body>

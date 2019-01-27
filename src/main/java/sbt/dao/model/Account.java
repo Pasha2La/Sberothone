@@ -63,7 +63,7 @@ public class Account implements Serializable {
         return password;
     }
 
-    public Boolean getPayed() {
+    public Boolean getIsPayed() {
         return isPayed;
     }
 
@@ -83,7 +83,7 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public void setPayed(Boolean payed) {
+    public void setIsPayed(Boolean payed) {
         isPayed = payed;
     }
 
