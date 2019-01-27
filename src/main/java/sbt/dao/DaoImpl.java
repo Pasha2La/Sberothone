@@ -6,16 +6,11 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import sbt.dao.mapper.AccountMapper;
 import sbt.dao.mapper.ReceiptMapper;
-import sbt.dao.mapper.ProductMapper;
-import sbt.dao.mapper.ReceiptMapper;
 import sbt.dao.model.*;
 import sbt.dao.repository.*;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -180,44 +175,12 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
 
     @Override
     public List<Receipt> getSortByView() {
-        String sql = "select * from sberfood_receipt order by n_view_count";
+        String sql = "select top 10 * from sberfood_receipt order by n_view_count";
         return getJdbcTemplate().query(
                 sql,
                 new ReceiptMapper()
         );
     }
-
-   /* @Override
-    public List<Receipt> filteredSearch(List<String> products,
-                                        List<String> categories,
-                                        String healthy) {
-        String sql = "select * from sberfood_receipt where c_healthy = ?";
-        List<Account> accounts = getJdbcTemplate().query(
-                sql,
-                new Object[]{1},
-                new AccountMapper()
-
-        );
-
-        String sql1 = "select * from sberfood_account where n_id = 1";
-        List<Account> accounts1 = getJdbcTemplate().query(
-                sql1,
-                (rs, rowNum) ->
-                        new Account(
-                                rs.getLong(1),
-                                rs.getString(2),
-                                rs.getString(3),
-                                rs.getBoolean(4),
-                                rs.getTimestamp(5))
-
-
-        );
-
-        System.out.println(accounts);
-        System.out.println(accounts1);
-
-        return accounts;
-    }*/
 
     @Override
     public void update(String sqlCommand) {
