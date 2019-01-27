@@ -2,9 +2,13 @@ package sbt.dao;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
 import sbt.dao.mapper.AccountMapper;
+import sbt.dao.mapper.ProductMapper;
+import sbt.dao.mapper.ReceiptMapper;
 import sbt.dao.model.*;
 import sbt.dao.repository.*;
 
@@ -21,6 +25,9 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
 
     @Autowired
     private DataSource hikariDataSource;
+    @Autowired
+    @Qualifier("entityManagerFactory")
+    private LocalContainerEntityManagerFactoryBean entityManagerFactoryBean;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -47,66 +54,86 @@ public class DaoImpl extends JdbcDaoSupport implements Dao {
     @PostConstruct
     public void postConstruct() {
         setDataSource(hikariDataSource);
+//
+//        example();
+//
+//        //можно по id
+//        //accountRepository.deleteById(345L);
+//
+//        //insert or update
+//        Account testAccount = new Account(
+//                "test",
+//                "pass",
+//                false,
+//                new Timestamp(Calendar.getInstance().getTimeInMillis())
+//        );
+//        accountRepository.save(testAccount);
+//
+//        testAccount.setPassword("newPassword");
+//        accountRepository.save(testAccount);
+//
+//
+//        //delete
+//        accountRepository.delete(testAccount);
+//
+//
+//        Iterable<Account> accounts = accountRepository.findAll();
+//
+//        for (Account account : accounts) {
+//            System.out.println(account);
+//        }
+//
+//        Iterable<Receipt> receipts = receiptRepository.findAll();
+//        for (Receipt receipt : receipts) {
+//            System.out.println(receipt);
+//        }
+//
+//        Iterable<Product> products = productRepository.findAll();
+//        for (Product product : products) {
+//            System.out.println(product);
+//        }
+//
+//        Iterable<Category> categories = categoryRepository.findAll();
+//        for (Category category : categories) {
+//            System.out.println(category);
+//        }
+//
+//        Iterable<AccountReceipt> accountReceipts = accountReceiptRepository.findAll();
+//        for (AccountReceipt accountReceipt : accountReceipts) {
+//            System.out.println(accountReceipt);
+//        }
+//
+//        Iterable<ProductReceipt> productReceipts = productReceiptRepository.findAll();
+//        for (ProductReceipt productReceipt : productReceipts) {
+//            System.out.println(productReceipt);
+//        }
+//
+//        Iterable<ReceiptCategory> receiptCategories = receiptCategoryRepository.findAll();
+//        for (ReceiptCategory receiptCategory : receiptCategories) {
+//            System.out.println(receiptCategory);
+//        }
 
-        example();
 
-        //можно по id
-        //accountRepository.deleteById(345L);
+    }
 
-        //insert or update
-        Account testAccount = new Account(
-                "test",
-                "pass",
-                false,
-                new Timestamp(Calendar.getInstance().getTimeInMillis())
+    @Override
+    public List<Receipt> getAvailableReceipts(String healthy, String category) {
+        String sql = "select * from ( "+
+                "select * from sberfood_receipt r" +
+                "join sberfood_receipt_category rc on r.n_id = rc.n_receipt_id) t1 " +
+                "join sberfood_category c on t1.n_category_id = c.n_id" +
+                "where t1.c_healthy = ? and c.c_category_name = ?";
+        List<Receipt> receipts = getJdbcTemplate().query(
+                sql,
+                new Object[]{healthy, category},
+                new ReceiptMapper()
         );
-        accountRepository.save(testAccount);
+        return receipts;
+    }
 
-        testAccount.setPassword("newPassword");
-        accountRepository.save(testAccount);
-
-
-        //delete
-        accountRepository.delete(testAccount);
-
-
-        Iterable<Account> accounts = accountRepository.findAll();
-
-        for (Account account : accounts) {
-            System.out.println(account);
-        }
-
-        Iterable<Receipt> receipts = receiptRepository.findAll();
-        for (Receipt receipt : receipts) {
-            System.out.println(receipt);
-        }
-
-        Iterable<Product> products = productRepository.findAll();
-        for (Product product : products) {
-            System.out.println(product);
-        }
-
-        Iterable<Category> categories = categoryRepository.findAll();
-        for (Category category : categories) {
-            System.out.println(category);
-        }
-
-        Iterable<AccountReceipt> accountReceipts = accountReceiptRepository.findAll();
-        for (AccountReceipt accountReceipt : accountReceipts) {
-            System.out.println(accountReceipt);
-        }
-
-        Iterable<ProductReceipt> productReceipts = productReceiptRepository.findAll();
-        for (ProductReceipt productReceipt : productReceipts) {
-            System.out.println(productReceipt);
-        }
-
-        Iterable<ReceiptCategory> receiptCategories = receiptCategoryRepository.findAll();
-        for (ReceiptCategory receiptCategory : receiptCategories) {
-            System.out.println(receiptCategory);
-        }
-
-
+    @Override
+    public List<Receipt> getAvailableReceipts(List<Product> products) {
+        return null;
     }
 
     @Override

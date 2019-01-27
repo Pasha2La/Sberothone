@@ -1,6 +1,7 @@
 package sbt.dao;
 
 import sbt.dao.model.Account;
+import sbt.dao.model.Product;
 import sbt.dao.model.Receipt;
 import sbt.data.LoginInfo;
 
@@ -15,4 +16,6 @@ public interface Dao {
 
     void update(String sqlCommand);
     Account getAccountByLogin(String login);
+    List<Receipt> getAvailableReceipts(String healthy, String category);
+    List<Receipt> getAvailableReceipts(List<Product> products);
 }
