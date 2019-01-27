@@ -1,12 +1,12 @@
 package sbt.auth;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSObject;
 import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.MACVerifier;
 import org.apache.log4j.Logger;
-import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,8 +30,7 @@ public class AuthService {
     public String authenticate(LoginInfo info) throws UnsupportedEncodingException {
         logger.info(String.format("Starting authenticating of user: %s", info.getLogin()));
         Account user = dao.getAccountByLogin(info.getLogin());
-        String token = genJWT(user);
-        return token;
+        return genJWT(user);
     }
 
     private String genJWT(Account user) throws UnsupportedEncodingException {

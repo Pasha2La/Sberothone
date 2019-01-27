@@ -1,23 +1,21 @@
 package sbt.controllers;
 
 import com.nimbusds.jose.JOSEException;
-import org.json.JSONObject;
-import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import sbt.auth.AuthService;
 import sbt.dao.DaoImpl;
-import sbt.dao.model.Receipt;
-import sbt.data.BaseInfo;
 import sbt.data.LoginInfo;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by durachenko-sv on 26.01.2019.
@@ -25,6 +23,7 @@ import java.util.List;
 @RestController
 //ToDo filter
 public class PhsRestController {
+
     private static final Logger logger = Logger.getLogger(PhsRestController.class);
 
     @Autowired
@@ -62,6 +61,7 @@ public class PhsRestController {
             logger.error("Can't logout user" + e.getMessage());
             return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
         }
+
         JSONObject resp = new JSONObject();
         resp.append("code", 200);
         return resp.toString();
@@ -70,8 +70,7 @@ public class PhsRestController {
     @RequestMapping("/verifyToken")
     public String verifyToken(@CookieValue String jwt) {
         try {
-            boolean b = authService.verifyJWT(jwt);
-            if (b) {
+            if (authService.verifyJWT(jwt)) {
                 logger.info("Token is valid!");
                 return "{\"code\":200}";
             } else {
@@ -82,7 +81,5 @@ public class PhsRestController {
             logger.error(String.format("Error while verifying JWT: %s", jwt), e);
             return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
         }
-
     }
-
 }
