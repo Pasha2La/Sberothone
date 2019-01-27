@@ -54,6 +54,7 @@ public class PhsRestController {
     @RequestMapping("/logout")
     public String logout(@CookieValue String jwt, HttpServletResponse response) {
         try {
+            logger.info("Logging out...");
             Cookie jwtRemove = new Cookie("jwt", jwt);
             jwtRemove.setMaxAge(0);
             response.addCookie(jwtRemove);
