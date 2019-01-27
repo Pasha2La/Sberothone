@@ -18,7 +18,7 @@ public class TimeoutUpdater {
     @Autowired
     private Dao dao;
 
-    @Scheduled(fixedDelay = 24 * 60 * 60 * 100)
+    @Scheduled(fixedDelay = 24 * 60 * 60 * 1000)
     public void cleanViewCounters() {
         while (true) {
             try {
