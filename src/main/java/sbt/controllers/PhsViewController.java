@@ -34,11 +34,6 @@ public class PhsViewController {
     @Autowired
     DaoImpl dao;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model, Principal principal) {
-        return "index";
-    }
-
     @RequestMapping(value = "/auth", method = RequestMethod.GET)
     public String auth(Model model, Principal principal) {
         return "auth";
