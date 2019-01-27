@@ -39,7 +39,7 @@ public class PhsRestController {
             logger.info(loginInfo);
             String token = authService.authenticate(loginInfo);
             Cookie jwt = new Cookie("jwt", token);
-            logger.info(String.format("jw: %s",token));
+            logger.info(String.format("jwt: %s",token));
             response.addCookie(jwt);
             JSONObject resp = new JSONObject();
             int code = 200;
@@ -52,18 +52,15 @@ public class PhsRestController {
     }
 
     @RequestMapping("/logout")
-    public String logout(@RequestBody LoginInfo info, HttpServletResponse response) {
+    public String logout(@CookieValue String jwt, HttpServletResponse response) {
         try {
-            String token = authService.authenticate(info);
-
-            Cookie jwtRemove = new Cookie("jwt", token);
+            Cookie jwtRemove = new Cookie("jwt", jwt);
             jwtRemove.setMaxAge(0);
             response.addCookie(jwtRemove);
         } catch (Exception e) {
             logger.error("Can't logout user" + e.getMessage());
             return "{\"code\":500,\"error\":\"" + e.getMessage() + "\"}";
         }
-
         JSONObject resp = new JSONObject();
         resp.append("code", 200);
         return resp.toString();
