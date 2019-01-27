@@ -23,9 +23,9 @@
         <p class="menu_point"><a th:href="@{'/account'}">Личный кабинет</a></p>
     </div>
     <div id="content">
-            <tr th:each="product : ${productList}">
-                <td th:text="${product}" />
-            </tr>
+        <ul>
+            <li th:each="p : ${productList}" th:text="${p}">user name</li>
+        </ul>
     </div>
 </div>
 </body>
